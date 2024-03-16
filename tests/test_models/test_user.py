@@ -9,11 +9,8 @@ import os
 from time import sleep
 import models
 import unittest
-from os import getenv
-import MySQLdb
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', 'NO DB')
 class TestUser_save(unittest.TestCase):
     """ test save method for User class """
     @classmethod
@@ -36,7 +33,6 @@ class TestUser_save(unittest.TestCase):
         except IOError:
             pass
 
-    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'NO DB')
     def test_save_for_user_object(self):
         """ test_save_for_user_object """
         user = User()
@@ -53,7 +49,6 @@ class TestUser_save(unittest.TestCase):
         with self.assertRaises(TypeError):
             user.save(None)
 
-    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'NO DB')
     def test_save_on_two_calls(self):
         """ test save for two different calls """
         user = User()
@@ -67,7 +62,6 @@ class TestUser_save(unittest.TestCase):
         self.assertLess(updated_at_2, user.updated_at)
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', 'NO DB')
 class TestUser_to_dict(unittest.TestCase):
     """class to test to_dict method for Amenity class """
     @classmethod
@@ -145,7 +139,6 @@ class TestUser_to_dict(unittest.TestCase):
         self.assertIn("attr_name", user.to_dict())
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != 'db', 'NO DB')
 class TestUser___str__(unittest.TestCase):
     @classmethod
     def setUp(self):
@@ -175,7 +168,6 @@ class TestUser___str__(unittest.TestCase):
         self.assertEqual(user.__str__(), s)
 
 
-@unittest.skipIf(getenv("HBNB_TYPE_STORAGE") != "db", "test")
 class TestUser__init__(unittest.TestCase):
     """ test init method for Amenity"""
     @classmethod
@@ -208,7 +200,6 @@ class TestUser__init__(unittest.TestCase):
         user = User()
         self.assertTrue(issubclass(type(user), BaseModel))
 
-    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'NO DB')
     def test_name_is_public_class_attribute(self):
         """ check if attr type is same as dict as well"""
         user = User()
@@ -223,12 +214,10 @@ class TestUser__init__(unittest.TestCase):
         """ test User type """
         self.assertEqual(type(User()), User)
 
-    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'NO DB')
     def test_User_public_attributes_type(self):
         """ test_public_public_attributes_type """
         self.assertEqual(str, type(User.first_name))
 
-    @unittest.skipIf(getenv("HBNB_TYPE_STORAGE") == 'db', 'NO DB')
     def test_id_if_typeis_str(self):
         """ test_id_if_typeis_str"""
         self.assertEqual(str, type(User().first_name))
