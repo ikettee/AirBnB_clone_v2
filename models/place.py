@@ -63,7 +63,7 @@ class Place(BaseModel, Base):
         @amenities.setter
         def amenities(self, value):
             """bind an amenity to a place for saving"""
-            if type(value) == Amenity:
+            if isinstance(value, Amenity):
                 self.amenity_ids.append(value.id)
 
         @property
